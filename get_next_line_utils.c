@@ -6,7 +6,7 @@
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 10:54:04 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/07 12:52:50 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:48:16 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -45,7 +45,8 @@ char	*ft_strjoin(char *str1, char *str2)
 		i++;
 		j++;
 	}
-	str3[i] = '\0';	
+	str3[i] = '\0';
+	free(str1);
 	return (str3);
 }
 
@@ -98,5 +99,6 @@ char	*ft_strcpystart(char *s, int start)
 		i++;
 	}
 	str[i] = '\0';
+
 	return (str);
 }

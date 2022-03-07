@@ -6,14 +6,14 @@
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:34:26 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/07 13:25:37 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:55:08 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	static int	ret = 0;
+	static int	ret;
 	static char	*c;
 	char		*str;
 
@@ -29,7 +29,7 @@ char	*ft_read(char **c, int *ret, int fd)
 	char	*tmp = NULL;
 	int 	flag;
 	char	*tampon;
-
+	//char 	*b;
 	flag = 0;
 	tampon = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	tampon[0] = '\0';
@@ -38,7 +38,7 @@ char	*ft_read(char **c, int *ret, int fd)
 		*ret = read(fd, tampon, BUFFER_SIZE);
 		tampon[*ret] = '\0';
 	}
-	if(!*c)
+	if(!*c && *ret != 0)
 		*c = tampon;
 	while (flag == 0 && *ret > 0)
 	{
@@ -54,16 +54,18 @@ char	*ft_read(char **c, int *ret, int fd)
 			*ret = read(fd, tampon, BUFFER_SIZE);
 			tampon[*ret] = '\0';
 			if (*ret != 0)
+			{
 				*c = ft_strjoin(tmp, tampon);
-			free(tmp);
+			}
+			else
+				free(tmp);
 		}
 		if ( *ret == 0)
 		{
 			str = ft_strcpy(*c, ft_strlen(*c));
 			flag = 1;
 		}
-	}
-
+	}	
 	if (str != NULL && *str == 0)
 	{
 		free(str);
@@ -83,7 +85,7 @@ char	*ft_read(char **c, int *ret, int fd)
 int main()
 {
 	int	fd;
-	fd = open("fd_Beyond File",O_RDONLY);
+	fd = open("fd_Empty Lines",O_RDONLY);
 	printf("%s",get_next_line(fd));
 	printf("%s",get_next_line(fd));
 	printf("%s",get_next_line(fd));
