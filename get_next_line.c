@@ -6,7 +6,7 @@
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:34:26 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/06 17:21:58 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/07 13:25:37 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -26,7 +26,7 @@ char	*get_next_line(int fd)
 char	*ft_read(char **c, int *ret, int fd)
 {
 	char	*str = NULL;
-	char	*tmp;
+	char	*tmp = NULL;
 	int 	flag;
 	char	*tampon;
 
@@ -50,7 +50,7 @@ char	*ft_read(char **c, int *ret, int fd)
 		}		
 		else 
 		{	
-			tmp = ft_strcpystart(*c, -1);
+			tmp =ft_strcpystart(*c, -1);
 			*ret = read(fd, tampon, BUFFER_SIZE);
 			tampon[*ret] = '\0';
 			if (*ret != 0)
@@ -62,6 +62,12 @@ char	*ft_read(char **c, int *ret, int fd)
 			str = ft_strcpy(*c, ft_strlen(*c));
 			flag = 1;
 		}
+	}
+
+	if (str != NULL && *str == 0)
+	{
+		free(str);
+		str = NULL;
 	}
 	free(tampon);
 	return (str);
@@ -77,7 +83,7 @@ char	*ft_read(char **c, int *ret, int fd)
 int main()
 {
 	int	fd;
-	fd = open("fd_Null end",O_RDONLY);
+	fd = open("fd_Beyond File",O_RDONLY);
 	printf("%s",get_next_line(fd));
 	printf("%s",get_next_line(fd));
 	printf("%s",get_next_line(fd));

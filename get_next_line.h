@@ -6,7 +6,7 @@
 /*   By: jperras <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:53 by jperras           #+#    #+#             */
-/*   Updated: 2022/03/06 17:12:29 by jperras          ###   ########.fr       */
+/*   Updated: 2022/03/07 09:03:14 by jperras          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+void check_leaks();
 int 	ft_strlen(char *str);
 char	*get_next_line(int fd);
 char	*ft_read(char **c, int *ret, int fd );
